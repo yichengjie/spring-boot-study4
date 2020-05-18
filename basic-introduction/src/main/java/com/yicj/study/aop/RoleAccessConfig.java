@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 @Aspect
 @Slf4j
 public class RoleAccessConfig {
-
     @Around("within(@org.springframework.stereotype.Controller *) && @annotation(func)")
     public Object functionAccessCheck(final ProceedingJoinPoint joinPoint, Function func) throws Throwable{
         if (func != null){
@@ -29,6 +28,11 @@ public class RoleAccessConfig {
         return o ;
     }
 
+    /**
+     * 检查是否可执行该方法
+     * @param funName
+     * @return
+     */
     private boolean canAccess(String funName) {
         if (funName.length() == 0){
             //总是允许访问
