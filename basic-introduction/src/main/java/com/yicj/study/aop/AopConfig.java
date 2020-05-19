@@ -19,8 +19,8 @@ public class AopConfig {
     //----------------------------------------------------------------------------------------------
     //execution(public com.xyz.service.* set*(..))：所有以set开头的public方法，且位于com.xyz.service包下
     //execution(public * *(..))：所有public方法，后面星号代表类路径和方法名
-    @Around("execution(public * *(..))")
-    //@Around("@within(org.springframework.stereotype.Controller)")
+    //@Around("execution(public * *(..))")
+    @Around("@within(org.springframework.stereotype.Controller)")
     public Object simpleAop(ProceedingJoinPoint pjo) throws Throwable{
         Object[] args = pjo.getArgs();
         log.info("args : {}", Arrays.asList(args));
