@@ -31,6 +31,6 @@ public class HelloController {
     public String getUser(@PathVariable Long userId, Model model){
         User user = new User(userId, "zhangsan") ;
         model.addAttribute("user",user) ;
-        return "userInfo.html" ;
+        return "userInfo.btl" ;
     }
 }
