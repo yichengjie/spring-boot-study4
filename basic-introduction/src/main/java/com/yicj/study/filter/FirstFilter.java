@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import javax.servlet.*;
 import java.io.IOException;
 
-@Component
 @Slf4j
+@Component
 public class FirstFilter implements Filter {
 
     @Override
@@ -21,5 +21,10 @@ public class FirstFilter implements Filter {
         }finally {
             AppContext.clear();
         }
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }
