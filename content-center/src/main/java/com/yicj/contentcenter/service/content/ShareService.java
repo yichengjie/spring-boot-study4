@@ -4,6 +4,7 @@ import com.yicj.contentcenter.dao.content.ShareMapper;
 import com.yicj.contentcenter.domain.dto.content.ShareDTO;
 import com.yicj.contentcenter.domain.dto.user.UserDTO;
 import com.yicj.contentcenter.domain.entity.content.Share;
+import com.yicj.contentcenter.feignclient.UserCenterFeignClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -32,11 +33,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ShareService {
     private final ShareMapper shareMapper ;
-    @Autowired
-    private  RestTemplate restTemplate ;
-    @Autowired
-    private final DiscoveryClient discoveryClient ;
-
+    private final UserCenterFeignClient userCenterFeignClient ;
+    //@Autowired
+    //private  RestTemplate restTemplate ;
+    //@Autowired
+    //private final DiscoveryClient discoveryClient ;
 
 
     public ShareDTO findById(Integer id){
@@ -51,7 +52,8 @@ public class ShareService {
         // lambda表达式
         // functional --> 函数式编程
         // 用户中心所有实例的信息
-        UserDTO userDTO = restTemplate.getForObject("http://user-center/users/{id}", UserDTO.class, userId);
+        //UserDTO userDTO = restTemplate.getForObject("http://user-center/users/{id}", UserDTO.class, userId);
+        UserDTO userDTO = this.userCenterFeignClient.findById(id);
         // 消息装配
         ShareDTO shareDTO = new ShareDTO();
         BeanUtils.copyProperties(share,shareDTO);
