@@ -1,8 +1,8 @@
-package com.yicj.contentcenter;
+package com.yicj.usercenter;
 
-import com.yicj.contentcenter.dao.user.UserMapper;
-import com.yicj.contentcenter.domain.entity.user.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.yicj.usercenter.dao.user.UserMapper;
+import com.yicj.usercenter.domain.entity.user.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,10 +18,10 @@ import java.util.Date;
  * @version 产品版本信息 yyyy-mm-dd 姓名(邮箱) 修改信息
  */
 @RestController
+@RequiredArgsConstructor
 public class TestController {
 
-    @Autowired
-    private UserMapper userMapper ;
+    private final UserMapper userMapper ;
 
     @GetMapping("/test")
     public User testInsert(){

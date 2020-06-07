@@ -2,10 +2,10 @@ package com.yicj.contentcenter;
 
 import com.yicj.contentcenter.dao.content.ShareMapper;
 import com.yicj.contentcenter.domain.entity.content.Share;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.Date;
 import java.util.List;
 
@@ -19,10 +19,9 @@ import java.util.List;
  * @version 产品版本信息 yyyy-mm-dd 姓名(邮箱) 修改信息
  */
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TestController {
-
-    @Autowired
-    private ShareMapper shareMapper ;
+    private final ShareMapper shareMapper ;
 
     @GetMapping("/test")
     public List<Share> testInsert(){
