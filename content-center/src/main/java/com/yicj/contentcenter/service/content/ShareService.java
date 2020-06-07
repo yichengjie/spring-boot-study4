@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 /**
  * ClassName: ShareService
@@ -49,13 +51,7 @@ public class ShareService {
         // lambda表达式
         // functional --> 函数式编程
         // 用户中心所有实例的信息
-        List<ServiceInstance> instances = discoveryClient.getInstances("user-center");
-        String targetUrl = instances.stream()
-                // 数据变换
-                .map(instance -> instance.getUri().toString() +"/users/{id}")
-                .findFirst().orElseThrow(() -> new IllegalArgumentException("当前没有实例!")) ;
-        log.info("=====> target url : {}", targetUrl);
-        UserDTO userDTO = restTemplate.getForObject(targetUrl, UserDTO.class, userId);
+        UserDTO userDTO = restTemplate.getForObject("http://user-center/users/{id}", UserDTO.class, userId);
         // 消息装配
         ShareDTO shareDTO = new ShareDTO();
         BeanUtils.copyProperties(share,shareDTO);

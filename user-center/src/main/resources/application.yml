@@ -10,9 +10,13 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+        # 指定namespace
+        #namespace: f2320048-5c9d-4476-a249-7d508e227703
+        # 指定集群名称 NJ
+        # cluster-name: NJ
 
   application:
     name: user-center
 
-
-
+server:
+  port: 8081
